@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>국방예산 재원 대시보드 · 2027</title><meta name="description" content="2026~2027년 국방예산 프로그램별 재원과 증감을 탐색하는 대시보드"><link rel="stylesheet" href="style.css"></head>
+<body>
+<aside class="rail"><div class="logo">B<span>↗</span></div><a href="#overview" title="전체 현황">◫</a><a href="#analysis" title="시각화 분석">▥</a><a href="#details" title="프로그램 상세">☷</a><div class="rail-bottom">27</div></aside>
+<main>
+<header><a class="brand" href="#overview">BUDGET <b>EXPLORER</b><span>국방예산 분석실</span></a><span class="status"><i></i> 2027 정부안</span></header>
+<section class="hero" id="overview"><div><div class="eyebrow">DEFENSE BUDGET / 2026 → 2027</div><h1>예산의 흐름을,<br><span>한눈에 선명하게.</span></h1><p>프로그램별 재원부터 부문별 변화까지.<br>필터를 선택하고 국방예산의 구성을 살펴보세요.</p></div><div class="hero-art" aria-hidden="true"><div class="orbit o1"></div><div class="orbit o2"></div><div class="art-label">BUDGET<br><b>2027</b></div><div class="mini-bar b1"></div><div class="mini-bar b2"></div><div class="mini-bar b3"></div><div class="mini-bar b4"></div><span class="art-plus">↗</span></div></section>
+<section class="filters" aria-label="데이터 필터"><div><label for="sector">부문</label><select id="sector"><option value="">전체 부문</option></select></div><div><label for="account">회계구분</label><select id="account"><option value="">전체 회계구분</option></select></div><button id="reset" class="reset">↺ 필터 초기화</button><span class="filter-count" id="filterCount" aria-live="polite"></span></section>
+<div class="section-heading"><h2>재원 한눈에 보기</h2><span>금액 단위: 억 원 · 전년 대비 증감</span></div>
+<section class="kpis" id="kpis" aria-live="polite"></section>
+<section id="analysis"><div class="section-heading"><h2>숫자로 읽는 예산</h2><span id="selectionLabel">전체 부문 · 전체 회계구분</span></div><div class="chart-grid">
+<article class="card"><div class="card-head"><div><h3>부문별 재원 비교</h3><p>2026년과 2027년 순재원</p></div><span class="chip">01 / COMPARE</span></div><div id="sectorChart" class="chart"></div></article>
+<article class="card"><div class="card-head"><div><h3>회계별 재원 구성</h3><p>2027년 양수 재원 기준 · 차감액 제외</p></div><span class="chip purple">02 / SHARE</span></div><div id="donutChart" class="chart"></div></article>
+<article class="card"><div class="card-head"><div><h3>주요 프로그램 TOP 10</h3><p>2027년 재원 규모 · 차감액 제외</p></div><span class="chip orange">03 / RANK</span></div><div id="rankChart" class="chart tall"></div></article>
+<article class="card"><div class="card-head"><div><h3>증가와 감소의 방향</h3><p>증감액 절댓값 상위 10개 · 차감액 포함</p></div><span class="chip green">04 / CHANGE</span></div><div id="deltaChart" class="chart tall"></div></article>
+<article class="card"><div class="card-head"><div><h3>재원 규모 × 증가율</h3><p>2027년 재원과 전년 대비 증감률 · 차감액 제외</p></div><span class="chip purple">05 / POSITION</span></div><div id="scatterChart" class="chart"></div></article>
+<article class="card"><div class="card-head"><div><h3>프로그램 재원 지도</h3><p>면적 = 2027년 재원 · 차감액 제외</p></div><span class="chip">06 / MAP</span></div><div id="treeChart" class="chart"></div></article>
+<article class="card"><div class="card-head"><div><h3>구분별 재원 비교</h3><p>병력운영비·전력유지비 등 구분별 합산</p></div><span class="chip green">07 / CATEGORY</span></div><div id="groupChart" class="chart"></div></article>
+<article class="card"><div class="card-head"><div><h3>총액에서 순재원까지</h3><p>2027년 양수 재원과 내부거래 차감액</p></div><span class="chip orange">08 / BRIDGE</span></div><div id="bridgeChart" class="chart"></div></article>
+</div></section>
+<section class="card detail-card" id="details"><div class="card-head"><div><h3>프로그램 상세 데이터</h3><p>열 제목으로 정렬 · 현재 필터 결과를 CSV로 저장</p></div><button id="csv" class="download">↓ CSV 다운로드</button></div><div class="table-tools"><input id="search" type="search" placeholder="프로그램명 또는 구분 검색…" aria-label="상세 표 검색"><span id="tableCount"></span></div><div class="table-wrap"><table><thead><tr><th>부문</th><th>회계구분</th><th>구분</th><th><button data-sort="name">프로그램명 ↕</button></th><th><button data-sort="y26">2026년 ↕</button></th><th><button data-sort="y27">2027년 ↕</button></th><th><button data-sort="delta">증감 ↕</button></th><th><button data-sort="rate">증감률 ↕</button></th></tr></thead><tbody id="tbody"></tbody></table></div></section>
+<footer><div><b>데이터 안내</b><p>출처: 붙임1_프로그램별_재원.xlsx · 2027년 국방예산 정부안 보도자료의 붙임1.<br>프로그램 상세와 내부거래 차감액을 합산했습니다. 상세 합계는 총재원 표와 2026년·2027년 각각 1억 원 차이가 있습니다.<br>증감률 = (2027년 − 2026년) ÷ 2026년. 음수 차감액의 증감률은 차감 규모의 변화를 나타냅니다. 엑셀 변경은 자동 반영되지 않습니다.</p></div><a href="재원_원본.xlsx" download>원본 엑셀 내려받기 ↗</a></footer>
+</main><script src="data.js"></script><script src="app.js"></script></body></html>
